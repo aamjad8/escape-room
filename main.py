@@ -5,7 +5,6 @@ from enums import *
 
 
 def introduce_first_partner():
-    print(partner_name)
     gender = input("If you ever get a partner do you prefer male or female?(m/f): ")
     temp_partner_name = ""
     if gender == Gender.MALE.value:
@@ -25,31 +24,22 @@ def introduce_first_partner():
 
 
 def introduce_second_partner():
-    partner_name2 = ""
-    partner = input("If you ever get a partner do you prefer male or female?(m/f): ")
-    if partner == Gender.MALE:
-        partner_name2 = random.choice(male_partner_name_arr)
-        partner_hair = random.choice(partner_appearance_arr)
-        partner_looks = random.choice(male_partner_accessories_arr)
-        partner_height = random.choice(height_arr)
-        print("You're partner's name is " + partner_name2 + ".")
-        print("You see " + partner_name2 + " sitting on the bed. He seems unaware")
-        print("of the situation. But he is. And that's where you come in to help him.")
-        print(partner_name2 + " has " + partner_hair + ".")
-        print("He wears " + partner_looks + ". He's " + partner_height + ".")
-        print("He didn't feel well and got trapped in the nurses office.")
-    elif partner == Gender.FEMALE:
-        partner_name2 = random.choice(female_partner_name_arr)
-        partner_hair = random.choice(partner_appearance_arr)
-        partner_looks = random.choice(female_partner_accessories_arr)
-        partner_height = random.choice(height_arr)
-        print("You're partner's name is " + partner_name2 + ".")
-        print("You see " + partner_name2 + " sitting on the bed. She seems unaware")
-        print("of the situation. But she is. And that's where you come in to help her.")
-        print(partner_name2 + " has " + partner_hair + ".")
-        print("She wears " + partner_looks + ". She's " + partner_height + ".")
-        print("She didn't feel well and got trapped in the nurses office.")
-    return partner_name2
+    gender = input("If you ever get a partner do you prefer male or female?(m/f): ")
+    temp_partner_name2 = ""
+    if gender == Gender.MALE.value:
+        temp_partner_name2 = random.choice(male_partner_name_arr)
+        print(male_partner_2_intro.format(partner_name2=temp_partner_name2,
+                                          partner_hair=random.choice(partner_appearance_arr),
+                                          partner_looks=random.choice(male_partner_accessories_arr),
+                                          partner_height=random.choice(height_arr)))
+
+    elif gender == Gender.FEMALE.value:
+        temp_partner_name2 = random.choice(female_partner_name_arr)
+        print(female_partner_2_intro.format(partner_name2=temp_partner_name2,
+                                            partner_hair=random.choice(partner_appearance_arr),
+                                            partner_looks=random.choice(female_partner_accessories_arr),
+                                            partner_height=random.choice(height_arr)))
+    return temp_partner_name2
 
 
 def escape_room1(partner_name):
@@ -66,7 +56,7 @@ def escape_room1(partner_name):
             closer_look = input("Would you like to take a closer look?(y/n): ")
             if closer_look == "y":
                 print("It says...")
-                print("Domestication Center of United States of America")
+                print("Domestication Center of the United States of America")
                 print("Established in 1963")
                 direction = input(question_where_to_look)
                 continue
@@ -79,7 +69,7 @@ def escape_room1(partner_name):
         elif direction == Direction.FORWARD.value:
             print("In front of you is the sleeping wolf. There is a bag that says Dog Food.")
             print("And a green backpack with a picture of the sleeping wolf.")
-            print("Underneath the picture is written Movie.")
+            print("Underneath the picture is written Mowie.")
             back_pack = input("Would you like to look in the backpack?(y/n): ")
             if back_pack == "y":
                 print("Inside is a safe with a four digit code, there is also a tennis ball.")
@@ -107,9 +97,9 @@ def escape_room1(partner_name):
                         letter = input("Would you like to open the letter?(y/n): ")
                         if letter == "y":
                             print("Dear Doctor Felix Vir,")
-                            print("Our wolf friend, Movie, is doing great. He's ")
+                            print("Our wolf friend, Mowie, is doing great. He's ")
                             print("just about tamed. He'll be like any dog in no time.")
-                            print("Movie loves to play tennis.")
+                            print("Mowie loves to play tennis.")
                         else:
                             print("Ok.")
                         open_box = input("Would you like to open the box?(y/n): ")
@@ -118,9 +108,9 @@ def escape_room1(partner_name):
                             if num2 == "1963":
                                 print("It pops open. Inside you find a key. Just ")
                                 print("what you need to open the door. You decide ")
-                                print("to take Movie with you. You take the backpack ")
+                                print("to take Mowie with you. You take the backpack ")
                                 print("and stuff in the dog food. You take the ball out ")
-                                print("and grab Movie's attention. The domesticates ")
+                                print("and grab Mowie's attention. The domesticaters ")
                                 print("have tamed him well. He follows right along. ")
                                 print("You take the key and unlock the door. You, ")
                                 print(partner_name + ", and Movie run out.")
@@ -137,7 +127,7 @@ def escape_room1(partner_name):
                             continue
                     elif num != "4321191":
                         print("You punch it in. Beep. Beep. Beep.")
-                        print("That code is incorrect. Hint: The ofs don't count.")
+                        print("That code is incorrect. Hint: The 'ofs' and 'the' doesn't count.")
                         direction = input(question_where_to_look)
                         continue
             elif back_pack == "n":
@@ -314,25 +304,23 @@ if __name__ == '__main__':
     loop_var = 0
 
     while loop_var != -1:
-        #ready = input(question_are_you_ready)
-        ready="y"
+        # ready = input(question_are_you_ready)
+        ready = "y"
         if ready == "n":
             print(come_back_text)
             exit()
         if ready == "y":
-            your_room = "cell"  # random.choice(list(room_dict.keys()))
+            your_room = "nurses office"  # random.choice(list(room_dict.keys()))
             print(room_dict[your_room])
 
             if your_room == Room.CELL.value:
-
                 partner_name = introduce_first_partner()
                 print(room_1_intro.format(partner_name=partner_name))
                 escape_room1(partner_name)
             elif your_room == Room.NURSE_OFFICE.value:
-                male_partner_name = introduce_second_partner()
-                introduce_second_partner()
-                print(room_1_intro.format(partner_name=male_partner_name))
-                escape_room2(male_partner_name)
+                partner_name2 = introduce_second_partner()
+                print(room_2_intro.format(partner_name2=partner_name2))
+                escape_room2(partner_name2)
             break
         else:
             print(invalid_input_text)
