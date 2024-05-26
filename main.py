@@ -1,20 +1,27 @@
 import random
+
 from data import *
 from enums import *
 
 
-def introduce_first_parter(partner_name):
-    partner = input("If you ever get a partner do you prefer male or female?(m/f): ")
-    if partner == Gender.MALE:
-        print(male_partner_1_intro.format(partner_name=partner_name,
+def introduce_first_partner():
+    print(partner_name)
+    gender = input("If you ever get a partner do you prefer male or female?(m/f): ")
+    temp_partner_name = ""
+    if gender == Gender.MALE.value:
+        temp_partner_name = random.choice(male_partner_name_arr)
+        print(male_partner_1_intro.format(partner_name=temp_partner_name,
                                           partner_hair=random.choice(partner_appearance_arr),
                                           partner_looks=random.choice(male_partner_accessories_arr),
                                           partner_height=random.choice(height_arr)))
-    elif partner == Gender.FEMALE:
-        print(female_partner_1_intro.format(partner_name=random.choice(female_partner_name_arr),
+
+    elif gender == Gender.FEMALE.value:
+        temp_partner_name = random.choice(female_partner_name_arr)
+        print(female_partner_1_intro.format(partner_name=temp_partner_name,
                                             partner_hair=random.choice(partner_appearance_arr),
                                             partner_looks=random.choice(female_partner_accessories_arr),
                                             partner_height=random.choice(height_arr)))
+    return temp_partner_name
 
 
 def introduce_second_partner():
@@ -313,19 +320,19 @@ if __name__ == '__main__':
             print(come_back_text)
             exit()
         if ready == "y":
-            your_room = random.choice(list(room_dict.keys()))
+            your_room = "cell"  # random.choice(list(room_dict.keys()))
             print(room_dict[your_room])
 
             if your_room == Room.CELL.value:
-                partner_name = random.choice(male_partner_name_arr)
-                introduce_first_parter(partner_name)
+
+                partner_name = introduce_first_partner()
                 print(room_1_intro.format(partner_name=partner_name))
                 escape_room1(partner_name)
             elif your_room == Room.NURSE_OFFICE.value:
-                partner_name = introduce_second_partner()
+                male_partner_name = introduce_second_partner()
                 introduce_second_partner()
-                print(room_1_intro.format(partner_name=partner_name))
-                escape_room2(partner_name)
+                print(room_1_intro.format(partner_name=male_partner_name))
+                escape_room2(male_partner_name)
             break
         else:
             print(invalid_input_text)
