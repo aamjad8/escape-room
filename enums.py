@@ -16,4 +16,10 @@ class Direction(Enum):
 
 class Room(Enum):
     CELL = "cell"
-    NURSE_OFFICE = "nurse office"
+    NURSE_OFFICE = "nurses office"
+
+
+class DRUG(Enum):
+    VALIUM_SEDATIVE = "v"
+    BENADRYL = "b"
+    LEECH_SALIVA = "ls"
